@@ -1,7 +1,8 @@
-package com.ravnnerdery.starwarschallenge
+package com.ravnnerdery.starwarschallenge.application
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ravnnerdery.starwarschallenge.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
