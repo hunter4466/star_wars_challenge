@@ -1,4 +1,4 @@
-query allPeople($first: Int, $after: String) {
+query getAllPeople($first: Int, $after: String) {
     allPeople (first: $first, after: $after) {
         edges {
             cursor
