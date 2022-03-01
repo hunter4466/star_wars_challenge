@@ -2,11 +2,18 @@ package com.ravnnerdery.starwarschallenge.application
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ravnnerdery.starwarschallenge.R
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import com.ravnnerdery.starwarschallenge.ui.Application
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val mainViewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent {
+            Application(viewModel = mainViewModel)
+        }
     }
 }
