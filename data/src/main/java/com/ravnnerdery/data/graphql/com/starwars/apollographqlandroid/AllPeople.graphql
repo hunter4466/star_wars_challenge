@@ -1,0 +1,29 @@
+query allPeople($first: Int, $after: String) {
+    allPeople (first: $first, after: $after) {
+        edges {
+            cursor
+            node {
+                id
+                name
+                species {name}
+                homeworld {name}
+                eyeColor
+                hairColor
+                skinColor
+                birthYear
+                vehicleConnection {
+                    vehicles {
+                        name
+                        id
+                    }
+                }
+
+            }
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+        }
+        totalCount
+    }
+}
