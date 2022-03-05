@@ -19,10 +19,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    var charactersList: Flow<PagingData<Character>>? = null
-    init {
-        uiScope.launch(Dispatchers.IO){
-            charactersList = provideCharactersPagingUseCase.execute()
-        }
-    }
+    var charactersList: Flow<PagingData<Character>>? = provideCharactersPagingUseCase.execute()
+
 }

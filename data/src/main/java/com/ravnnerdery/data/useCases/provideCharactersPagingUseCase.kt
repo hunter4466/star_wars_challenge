@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface ProvideCharactersPagingUseCase {
-    suspend fun  execute(): Flow<PagingData<Character>>
+    fun  execute(): Flow<PagingData<Character>>
 }
 
 class ProvideCharactersPagingUseCaseImpl @Inject constructor(private val repo: MainRepository): ProvideCharactersPagingUseCase {
-    override suspend fun execute(): Flow<PagingData<Character>>  = repo.provideCharactersPaging()
+    override fun execute(): Flow<PagingData<Character>>  = repo.provideCharactersPaging()
 }

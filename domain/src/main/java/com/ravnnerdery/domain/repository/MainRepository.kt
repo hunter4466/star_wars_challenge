@@ -6,5 +6,5 @@ import com.ravnnerdery.domain.models.Character
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
-    suspend fun provideCharactersPaging(): Flow<PagingData<Character>>
+    fun provideCharactersPaging(): Flow<PagingData<Character>>
 }

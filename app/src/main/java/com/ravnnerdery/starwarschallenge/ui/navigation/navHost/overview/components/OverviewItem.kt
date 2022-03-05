@@ -1,20 +1,13 @@
 package com.ravnnerdery.starwarschallenge.ui.navigation.navHost.overview.components
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-
-data class Border(val strokeWidth: Dp, val color: Color)
+import com.ravnnerdery.starwarschallenge.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -28,9 +21,29 @@ fun OverviewItem(
         onClick = { onclick(name) },
         modifier = Modifier.padding(start = 16.dp),
     ) {
-        Column() {
-            Text(text = name, style = MaterialTheme.typography.h6)
-            Text(text = "$specie from $homeWorld")
+        Column {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+            ) {
+                Column() {
+                    Text(text = name, style = MaterialTheme.typography.h5, color = Color.DarkGray)
+                    Text(
+                        text = "$specie from $homeWorld",
+                        style = MaterialTheme.typography.subtitle1,
+                        color = Color.Gray
+                    )
+                }
+                Column(modifier = Modifier.padding(16.dp, 16.dp, 32.dp, 16.dp)) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.right_arrow),
+                        contentDescription = null
+                    )
+                }
+            }
+            Divider(color = Color.DarkGray, thickness = 1.dp)
         }
     }
 }

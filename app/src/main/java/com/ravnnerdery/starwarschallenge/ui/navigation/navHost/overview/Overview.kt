@@ -2,23 +2,34 @@ package com.ravnnerdery.starwarschallenge.ui.navigation.navHost.overview
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemsIndexed
+import coil.ImageLoader
 import com.ravnnerdery.domain.models.Character
+import com.ravnnerdery.starwarschallenge.ui.navigation.navHost.overview.components.Loading
 import com.ravnnerdery.starwarschallenge.ui.navigation.navHost.overview.components.OverviewItem
 
 @Composable
 fun Overview(
+    imageLoader: ImageLoader,
     charactersList: LazyPagingItems<Character>,
-    onClick: (String) -> Unit
+    onClick: (Character) -> Unit,
+    filter: String,
 ) {
 
     LazyColumn{
         itemsIndexed(charactersList) { _, item ->
             if(item != null) {
-                OverviewItem(name = item.name, specie = item.species, homeWorld = item.homeworld, onclick = { onClick(item.name) })
+                if(item.name.lowercase().contains(filter.lowercase())){
+                    OverviewItem(name = item.name, specie = item.species, homeWorld = item.homeworld, onclick = { onClick(item) })
+                }
+            }
+        }
+        if(charactersList.loadState.append == LoadState.Loading){
+            item{
+                Loading(imageLoader = imageLoader)
             }
         }
     }
-
 }

@@ -12,7 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private const val STAR_WARS_DATABASE = "StarWarsDatabase11"
+private const val STAR_WARS_DATABASE = "StarWarsDatabase12"
 
 @InstallIn(SingletonComponent::class)
 @Module
