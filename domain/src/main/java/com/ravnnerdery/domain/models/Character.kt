@@ -2,9 +2,7 @@ package com.ravnnerdery.domain.models
 
 data class Character(
     val cursor: String,
-    val groupEndCursor: String,
-    val groupStartCursor: String,
-    val id: Long,
+    val id: String,
     val name: String,
     val species: String,
     val homeworld: String,

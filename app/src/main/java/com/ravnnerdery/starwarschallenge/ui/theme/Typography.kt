@@ -11,7 +11,7 @@ import com.ravnnerdery.starwarschallenge.R
 private var sfProFamily = FontFamily(
     Font(R.font.sfprodisplayregular),
     Font(R.font.sfprodisplaymedium, FontWeight.W500),
-    Font(R.font.sfprodisplayregular, FontWeight.SemiBold)
+    Font(R.font.sfprodisplaybold, FontWeight.SemiBold)
 )
 
 
@@ -24,7 +24,7 @@ val ApplicationTypography = Typography(
     h5 = TextStyle(
         fontFamily = sfProFamily,
         fontWeight = FontWeight.W600,
-        fontSize = 24.sp
+        fontSize = 22.sp
     ),
     h6 = TextStyle(
         fontFamily = sfProFamily,

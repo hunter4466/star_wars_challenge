@@ -1,21 +1,19 @@
 package com.ravnnerdery.data.mappers
 
-import com.ravnnerdery.data.database.models.CharacterEntity
 import com.ravnnerdery.domain.models.Character
+import com.ravnnerdery.starwarschallenge.GetAllPeopleQuery
 
-fun mapToDomainModel(dbItem: CharacterEntity): Character {
+fun mapToDomainModel(networkItem: GetAllPeopleQuery.Edge?): Character {
     return Character(
-        cursor = dbItem.ownCursor,
-        groupEndCursor = dbItem.groupEndCursor,
-        groupStartCursor = dbItem.groupStartCursor,
-        id = dbItem.id,
-        name = dbItem.name,
-        species = dbItem.specie,
-        homeworld = dbItem.homeworld,
-        eyeColor = dbItem.eyeColor,
-        hairColor = dbItem.hairColor,
-        skinColor = dbItem.skinColor,
-        birthYear = dbItem.birthYear,
-        vehicles = dbItem.vehicles?.map{ it?.name ?: "Undefined" } ?: emptyList()
+        cursor = networkItem?.cursor ?: "Undefined",
+        id = networkItem?.node?.id ?: "Undefined",
+        name = networkItem?.node?.name ?: "Undefined",
+        species = networkItem?.node?.species?.name ?: "Undefined",
+        homeworld = networkItem?.node?.homeworld?.name ?: "Undefined",
+        eyeColor = networkItem?.node?.eyeColor ?: "Undefined",
+        hairColor = networkItem?.node?.hairColor ?: "Undefined",
+        skinColor = networkItem?.node?.skinColor ?: "Undefined",
+        birthYear = networkItem?.node?.birthYear ?: "Undefined",
+        vehicles = networkItem?.node?.vehicleConnection?.vehicles?.map{ it?.name ?: "Undefined" } ?: emptyList()
     )
 }
