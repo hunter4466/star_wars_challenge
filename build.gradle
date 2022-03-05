@@ -9,7 +9,7 @@ buildscript {
         version_kotlin = "1.5.31"
         version_lifecycle_extensions = "2.2.0"
         version_lifecycle = "2.2.0"
-        version_room = "2.2.4"
+        version_room = "2.4.0"
         version_appcompat = "1.2.0"
         version_fragment = "1.0.0"
         version_retrofit = "2.9.0"
@@ -20,6 +20,7 @@ buildscript {
         version_rxandroid = '2.1.0'
         version_compose = '1.0.5'
         version_compose_nav = '2.4.1'
+        version_paging = '3.1.0'
     }
     repositories {
         google()

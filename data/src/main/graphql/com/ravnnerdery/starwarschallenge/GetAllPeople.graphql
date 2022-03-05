@@ -14,15 +14,16 @@ query getAllPeople($first: Int, $after: String) {
                 vehicleConnection {
                     vehicles {
                         name
-                        id
                     }
                 }
 
             }
         }
         pageInfo {
+            startCursor
             endCursor
             hasNextPage
+            hasPreviousPage
         }
         totalCount
     }

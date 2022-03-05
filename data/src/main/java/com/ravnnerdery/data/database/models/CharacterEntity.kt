@@ -4,17 +4,26 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.ravnnerdery.data.mappers.DomainMapper
-import com.ravnnerdery.domain.models.Character
+import com.ravnnerdery.starwarschallenge.GetAllPeopleQuery
 
 @Entity(tableName = "characters_table", indices = [Index(value = ["apiId"], unique = true)])
 class CharacterEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     @ColumnInfo
-    val cursor: String,
+    val groupStartCursor: String,
+    @ColumnInfo
+    val groupEndCursor: String,
+    @ColumnInfo
+    val ownCursor: String,
+    @ColumnInfo
+    val label: String,
     @ColumnInfo(name = "apiId")
     val edgeId: String,
+    @ColumnInfo
+    val hasNextPage: Boolean,
+    @ColumnInfo
+    val hasPreviousPage: Boolean,
     @ColumnInfo
     val name: String,
     @ColumnInfo
@@ -30,19 +39,5 @@ class CharacterEntity(
     @ColumnInfo
     val birthYear: String,
     @ColumnInfo
-    val vehicles: String
-) : DomainMapper<Character> {
-    override fun mapToDomainModel(): Character = Character(
-        id,
-        cursor,
-        edgeId,
-        name,
-        specie,
-        homeworld,
-        eyeColor,
-        hairColor,
-        skinColor,
-        birthYear,
-        vehicles.split(",")
-    )
-}
+    val vehicles: List<GetAllPeopleQuery.Vehicle>,
+)

@@ -77,13 +77,6 @@ dependencies {
     // Android KTX
     implementation "androidx.core:core-ktx:$version_core"
 
-    // Retrofit and Moshi
-    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
-    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
-    implementation "com.squareup.moshi:moshi:$version_moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-
     // Room
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.room:room-runtime:$version_room"
@@ -92,10 +85,6 @@ dependencies {
     //Dagger Hilt
     implementation "com.google.dagger:hilt-android:$version_hilt"
     kapt "com.google.dagger:hilt-android-compiler:$version_hilt"
-
-    //RxAndroid / RxJava
-    implementation "io.reactivex.rxjava2:rxjava:$version_rxjava"
-    implementation "io.reactivex.rxjava2:rxandroid:$version_rxandroid"
 
     // ----- COMPOSE -------
     // Integration with activities
@@ -131,5 +120,11 @@ dependencies {
     implementation "androidx.compose.compiler:compiler:$version_compose"
     implementation "androidx.compose.runtime:runtime:$version_compose"
     implementation "androidx.compose.runtime:runtime-livedata:$version_compose"
+
+    // Pagination
+    implementation "androidx.paging:paging-runtime-ktx:$version_paging"
+    testImplementation "androidx.paging:paging-common-ktx:$version_paging"
+    implementation "androidx.paging:paging-guava:$version_paging"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
 }
 

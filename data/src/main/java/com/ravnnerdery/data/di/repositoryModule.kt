@@ -1,6 +1,10 @@
 package com.ravnnerdery.data.di
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.RemoteMediator
+import com.ravnnerdery.data.repository.AppRemoteMediator
 import com.ravnnerdery.data.repository.MainRepositoryImpl
+import com.ravnnerdery.domain.models.Character
 import com.ravnnerdery.domain.repository.MainRepository
 import dagger.Module
 import dagger.Provides
@@ -17,5 +21,12 @@ object RepositoryModule {
     @Singleton
     fun provideMainRepositoryImpl(repository: MainRepositoryImpl): MainRepository {
         return repository
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun provideRemoteMediator(
+        remoteMediator: AppRemoteMediator
+    ): RemoteMediator<String, Character> {
+        return remoteMediator
     }
 }

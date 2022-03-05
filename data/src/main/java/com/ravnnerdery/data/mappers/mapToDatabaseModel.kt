@@ -1,25 +1,32 @@
 package com.ravnnerdery.data.mappers
 
+import androidx.room.ColumnInfo
 import com.ravnnerdery.data.database.models.CharacterEntity
 import com.ravnnerdery.starwarschallenge.GetAllPeopleQuery
 
-fun mapToDatabaseModel(edge: GetAllPeopleQuery.Edge?): CharacterEntity {
-    val stringedVehicles = mutableListOf<String>()
-    edge?.node?.vehicleConnection?.vehicles?.forEach { vehicle ->
-        vehicle?.let {
-            it.name?.let { it1 -> stringedVehicles.add(it1) }
-        }
-    }
+fun mapToDatabaseModel(
+    response: GetAllPeopleQuery.Edge?,
+    label: String,
+    hasNextPage: Boolean,
+    hasPreviousPage: Boolean,
+    groupStartCursor: String,
+    groupEndCursor: String,
+): CharacterEntity {
     return CharacterEntity(
-        cursor = edge?.cursor ?: "Undefined",
-        edgeId = edge?.node?.id ?: "Undefined",
-        name = edge?.node?.name ?: "Undefined",
-        specie = edge?.node?.species?.name ?: "Undefined",
-        homeworld = edge?.node?.homeworld?.name ?: "Undefined",
-        eyeColor = edge?.node?.eyeColor ?: "Undefined",
-        hairColor = edge?.node?.hairColor ?: "Undefined",
-        skinColor = edge?.node?.skinColor ?: "Undefined",
-        birthYear = edge?.node?.birthYear ?: "Undefined",
-        vehicles = stringedVehicles.joinToString(separator = ",")
+        groupStartCursor = groupStartCursor,
+        groupEndCursor = groupEndCursor,
+        ownCursor = response?.cursor ?: "Undefined",
+        label = label,
+        edgeId = response?.node?.id ?: "Undefined",
+        hasNextPage = hasNextPage,
+        hasPreviousPage = hasPreviousPage,
+        name = response?.node?.name ?: "Undefined",
+        specie = response?.node?.species?.name ?: "Undefined",
+        homeworld = response?.node?.homeworld?.name ?: "Undefined",
+        eyeColor = response?.node?.eyeColor ?: "Undefined",
+        hairColor = response?.node?.hairColor ?: "Undefined",
+        skinColor = response?.node?.skinColor ?: "Undefined",
+        birthYear = response?.node?.birthYear ?: "Undefined",
+        vehicles = response?.node?.vehicleConnection?.vehicles?.map { GetAllPeopleQuery.Vehicle(it?.name) } ?: emptyList() , //List<GetAllPeopleQuery.Vehicle?>?,
     )
 }

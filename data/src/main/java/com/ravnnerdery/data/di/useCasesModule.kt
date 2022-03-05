@@ -13,10 +13,9 @@ class UseCasesModule {
 
     @Provides
     @Singleton
-    fun loadItemsFromApiUseCase(
-        loadItemsFromApiUseCaseImpl: LoadItemsFromApiUseCaseImpl
-    ): LoadItemsFromApiUseCase  {
-        return loadItemsFromApiUseCaseImpl
+    fun provideCharactersPagingUseCase(
+        provideCharactersPagingUseCaseImpl : ProvideCharactersPagingUseCaseImpl
+    ): ProvideCharactersPagingUseCase {
+        return provideCharactersPagingUseCaseImpl
     }
-
 }

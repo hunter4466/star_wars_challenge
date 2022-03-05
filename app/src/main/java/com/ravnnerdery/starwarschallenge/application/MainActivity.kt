@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material.Scaffold
+import com.ravnnerdery.starwarschallenge.ui.theme.ApplicationTheme
 import com.ravnnerdery.starwarschallenge.ui.Application
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,7 +15,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Application(viewModel = mainViewModel)
+            ApplicationTheme {
+                Scaffold {
+                    Application(viewModel = mainViewModel)
+                }
+            }
         }
     }
 }

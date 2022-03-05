@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.ravnnerdery.data.database.DatabaseDao
 import com.ravnnerdery.data.database.StarWarsDataBase
+import com.ravnnerdery.data.database.models.Converter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private const val STAR_WARS_DATABASE = "StarWarsDatabase"
+private const val STAR_WARS_DATABASE = "StarWarsDatabase11"
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -31,6 +32,7 @@ class DatabaseModule {
             STAR_WARS_DATABASE
         )
             .fallbackToDestructiveMigration()
+            .addTypeConverter(Converter())
             .build()
     }
 }

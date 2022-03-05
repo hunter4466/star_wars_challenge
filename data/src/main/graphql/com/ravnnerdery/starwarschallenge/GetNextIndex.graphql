@@ -1,0 +1,9 @@
+query getNextIndex($after: String) {
+    allPeople (first: 1, after: $after) {
+        pageInfo {
+            hasNextPage
+            startCursor
+        }
+        totalCount
+    }
+}
