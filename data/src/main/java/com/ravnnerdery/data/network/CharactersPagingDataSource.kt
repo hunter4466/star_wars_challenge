@@ -17,12 +17,14 @@ class CharactersPagingDataSource @Inject constructor(
 ) :
 
     PagingSource<String, Character>() {
+    private var jumpFactor: String = "5"
     override fun getRefreshKey(state: PagingState<String, Character>): String {
         return state.anchorPosition.toString()
     }
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Character> {
         return try {
+            Log.v("ONOFFLINE","TRYING WITH online")
             withContext(Dispatchers.IO) {
                 val response = apolloClient.apolloClientInstance()
                     .query(GetAllPeopleQuery(5, params.key)).execute()
@@ -48,8 +50,21 @@ class CharactersPagingDataSource @Inject constructor(
                 )
             }
         } catch (e: Exception) {
-            LoadResult.Error(e)
+            Log.v("ONOFFLINE","TRYING WITH OFFLINE")
+            withContext(Dispatchers.IO) {
+                val nextKey: String = params.key ?: "0"
+                val response = databaseDao.getPaginatedCharacters(jumpFactor.toInt(), nextKey.toInt())
+                val data = response.map{ it.mapToDomainModel()}
+                var nextPageIndex: String? = null
+                if (data.isNotEmpty()) {
+                    nextPageIndex = nextKey.toInt().plus(jumpFactor.toInt()).toString()
+                }
+                LoadResult.Page(
+                    data = data.orEmpty(),
+                    prevKey = null,
+                    nextKey = nextPageIndex
+                )
+            }
         }
-
     }
 }

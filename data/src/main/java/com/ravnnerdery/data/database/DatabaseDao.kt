@@ -16,9 +16,15 @@ interface DatabaseDao {
     @Query("SELECT * FROM characters_table")
     fun getAllCharacters(): List<CharacterEntity>
 
+    @Query("SELECT * FROM characters_table LIMIT :limit OFFSET :key")
+    fun getPaginatedCharacters(limit: Int, key: Int): List<CharacterEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPreference(pref: PreferencesEntity)
 
     @Query("SELECT * FROM preferences_table")
     fun getAllPreferences(): List<PreferencesEntity>
+
+    @Query("SELECT COUNT(*) FROM characters_table")
+    fun getTablesCount(): Long
 }

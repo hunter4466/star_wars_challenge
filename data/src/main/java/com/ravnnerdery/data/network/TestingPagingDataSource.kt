@@ -55,7 +55,6 @@ class TestingPagingDataSource @Inject constructor() :
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Character> {
         val response = getData()
-
         return LoadResult.Page(
             data = response,
             prevKey = null,
