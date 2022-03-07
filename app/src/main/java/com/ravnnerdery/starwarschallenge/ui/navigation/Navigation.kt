@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import coil.ImageLoader
 import com.ravnnerdery.domain.models.Character
+import com.ravnnerdery.domain.models.Preference
 import com.ravnnerdery.starwarschallenge.ui.navigation.navHost.NavigationHost
 import com.ravnnerdery.starwarschallenge.ui.navigation.topbar.TopBar
 
@@ -25,6 +26,8 @@ fun Navigation(
     onSearchTextChanged: (String) -> Unit,
     onCloseSearchBar: () -> Unit,
     filter: String,
+    prefList: List<Preference>,
+    onPrefClicked: (String, Boolean) -> Unit,
 ) {
     Column {
         TopBar(
@@ -48,6 +51,8 @@ fun Navigation(
             charactersList = charactersList,
             onNavigated = { onNavigated(it) },
             filter = filter,
+            prefList = prefList,
+            onPrefClicked = {key, pref -> onPrefClicked(key, pref) }
         )
     }
 

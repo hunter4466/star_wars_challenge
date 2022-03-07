@@ -35,6 +35,7 @@ fun Application(viewModel: MainViewModel, imageLoader: ImageLoader) {
     val navController = rememberNavController()
     val lazyPagingItems: LazyPagingItems<Character>? =
         viewModel.charactersList?.collectAsLazyPagingItems()
+    val prefList = viewModel.getPreferences().collectAsState(initial = emptyList())
 
     if (lazyPagingItems != null) {
         Navigation(
@@ -61,6 +62,8 @@ fun Application(viewModel: MainViewModel, imageLoader: ImageLoader) {
             onSearchTextChanged = { userSearchState = it },
             onCloseSearchBar = { hasSearchBar = false },
             filter = userSearchState,
+            prefList = prefList.value,
+            onPrefClicked = { key, pref ->  viewModel.updatePreference(key, pref) }
         )
         if (!hasSearchBar) {
             SearchIcon(
