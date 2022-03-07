@@ -36,32 +36,30 @@ fun OverviewItem(
                     .padding(vertical = 16.dp),
             ) {
                 Row {
-                    if (filteredPrefList.isEmpty()) {
-                        IconButton(onClick = { onPrefClicked(id, true) }) {
-                            Icon(
-                                Icons.Filled.Star,
-                                contentDescription = "",
-                                tint = MaterialTheme.colors.secondary
-                            )
-                        }
-                    } else {
-                        if (filteredPrefList[0].preference) {
-                            IconButton(onClick = { onPrefClicked(id, false) }) {
-                                Icon(
-                                    Icons.Filled.Star,
-                                    contentDescription = "",
-                                    tint = MaterialTheme.colors.error
-                                )
-                            }
+                    IconButton(onClick = {
+                        if (filteredPrefList.isEmpty()) {
+                            onPrefClicked(id, true)
                         } else {
-                            IconButton(onClick = { onPrefClicked(id, true) }) {
-                                Icon(
-                                    Icons.Filled.Star,
-                                    contentDescription = "",
-                                    tint = MaterialTheme.colors.secondary
-                                )
+                            if (filteredPrefList[0].preference) {
+                                onPrefClicked(id, false)
+                            } else {
+                                onPrefClicked(id, true)
                             }
                         }
+                    }) {
+                        Icon(
+                            Icons.Filled.Star,
+                            contentDescription = "",
+                            tint = if (filteredPrefList.isEmpty()) {
+                                MaterialTheme.colors.secondary
+                            } else {
+                                if (filteredPrefList[0].preference) {
+                                    MaterialTheme.colors.error
+                                } else {
+                                    MaterialTheme.colors.secondary
+                                }
+                            }
+                        )
                     }
 
                     Column() {
