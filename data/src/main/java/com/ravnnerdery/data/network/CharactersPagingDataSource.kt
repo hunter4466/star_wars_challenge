@@ -1,6 +1,5 @@
 package com.ravnnerdery.data.network
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ravnnerdery.data.database.DatabaseDao
@@ -24,18 +23,13 @@ class CharactersPagingDataSource @Inject constructor(
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Character> {
         return try {
-            Log.v("ONOFFLINE","TRYING WITH online")
             withContext(Dispatchers.IO) {
                 val response = apolloClient.apolloClientInstance()
                     .query(GetAllPeopleQuery(5, params.key)).execute()
 
                 val data = response.data?.allPeople?.edges?.map { mapToDomainModel(it) }
                 data?.forEach {
-                    try {
-                        databaseDao.insertCharacter(mapToDatabaseModel(it))
-                    } catch (e: Exception) {
-                        Log.wtf("BUGCHASE", "database error ${e}")
-                    }
+                    databaseDao.insertCharacter(mapToDatabaseModel(it))
                 }
                 var nextPageIndex: String? = null
                 if (response.data?.allPeople?.edges?.isNotEmpty() == true) {
@@ -50,7 +44,6 @@ class CharactersPagingDataSource @Inject constructor(
                 )
             }
         } catch (e: Exception) {
-            Log.v("ONOFFLINE","TRYING WITH OFFLINE")
             withContext(Dispatchers.IO) {
                 val nextKey: String = params.key ?: "0"
                 val response = databaseDao.getPaginatedCharacters(jumpFactor.toInt(), nextKey.toInt())
@@ -60,7 +53,7 @@ class CharactersPagingDataSource @Inject constructor(
                     nextPageIndex = nextKey.toInt().plus(jumpFactor.toInt()).toString()
                 }
                 LoadResult.Page(
-                    data = data.orEmpty(),
+                    data = data,
                     prevKey = null,
                     nextKey = nextPageIndex
                 )
