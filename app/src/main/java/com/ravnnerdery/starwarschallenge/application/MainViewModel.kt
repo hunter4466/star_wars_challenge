@@ -20,8 +20,6 @@ class MainViewModel @Inject constructor(
     private val provideGetPreferenceUseCase: ProvideGetPreferenceUseCase,
     private val provideUpdatePreferenceUseCase: ProvideUpdatePreferenceUseCase
 ) : ViewModel() {
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     var charactersList: Flow<PagingData<Character>>? = provideCharactersPagingUseCase.execute()
     fun updatePreference(key: String, pref: Boolean) {
         provideUpdatePreferenceUseCase.execute(key, pref)
