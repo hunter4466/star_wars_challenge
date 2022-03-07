@@ -23,18 +23,15 @@ class MainRepositoryImpl @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     override fun provideCharactersPaging(): Flow<PagingData<Character>> = Pager(
         config = PagingConfig(pageSize = 20),
-        initialKey = "home"
     )
     {
         dataSource
     }.flow
 
-
     override fun updatePreference(key: String, pref: Boolean) {
         uiScope.launch(Dispatchers.IO) {
             databaseDao.insertPreference(PreferencesEntity(apiId = key, preference = pref))
         }
-
     }
 
     override fun getPreferences(): Flow<List<Preference>> = flow {
@@ -47,6 +44,4 @@ class MainRepositoryImpl @Inject constructor(
             delay(1000)
         }
     }.flowOn(Dispatchers.IO)
-
-
 }

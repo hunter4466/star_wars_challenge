@@ -4,9 +4,6 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
-val black1000 = Color(color = 0xCB000000)
-val white1000 = Color(color = 0xFFC8C8C8)
-
 val DarkColors = darkColors(
     primary = Color.White,
     primaryVariant = Color.White, // white1000
