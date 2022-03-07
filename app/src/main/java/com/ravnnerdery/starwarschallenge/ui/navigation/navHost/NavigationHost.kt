@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.paging.compose.LazyPagingItems
 import coil.ImageLoader
 import com.ravnnerdery.domain.models.Character
+import com.ravnnerdery.domain.models.Preference
 import com.ravnnerdery.starwarschallenge.ui.navigation.navHost.detail.Detail
 import com.ravnnerdery.starwarschallenge.ui.navigation.navHost.overview.Overview
 
@@ -18,6 +19,8 @@ fun NavigationHost(
     charactersList: LazyPagingItems<Character>,
     onNavigated: (Character) -> Unit,
     filter: String,
+    prefList: List<Preference>,
+    onPrefClicked: (String, Boolean) -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -32,6 +35,8 @@ fun NavigationHost(
                     navController.navigate("detail")
                 },
                 filter = filter,
+                onPrefClicked = { key, pref -> onPrefClicked(key, pref)},
+                prefList = prefList
             )
         }
         composable("detail") { Detail(activeCharacter = activeCharacter) }

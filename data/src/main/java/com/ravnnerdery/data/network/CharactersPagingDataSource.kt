@@ -29,9 +29,6 @@ class CharactersPagingDataSource @Inject constructor(
 
                 val data = response.data?.allPeople?.edges?.map { mapToDomainModel(it) }
                 data?.forEach {
-                    Log.wtf("BUGCHASE", "trying to implement${it.name}")
-                }
-                data?.forEach {
                     try {
                         databaseDao.insertCharacter(mapToDatabaseModel(it))
                     } catch (e: Exception) {

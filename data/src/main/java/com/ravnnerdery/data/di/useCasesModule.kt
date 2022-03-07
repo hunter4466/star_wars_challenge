@@ -18,4 +18,19 @@ class UseCasesModule {
     ): ProvideCharactersPagingUseCase {
         return provideCharactersPagingUseCaseImpl
     }
+
+    @Provides
+    @Singleton
+    fun provideGetPreferenceUseCase(
+        provideGetPreferenceUseCaseImpl : ProvideGetPreferenceUseCaseImpl
+    ): ProvideGetPreferenceUseCase {
+        return provideGetPreferenceUseCaseImpl
+    }
+    @Provides
+    @Singleton
+    fun provideUpdatePreferenceUseCase(
+        provideUpdatePreferenceUseCaseImpl : ProvideUpdatePreferenceUseCaseImpl
+    ): ProvideUpdatePreferenceUseCase {
+        return provideUpdatePreferenceUseCaseImpl
+    }
 }
