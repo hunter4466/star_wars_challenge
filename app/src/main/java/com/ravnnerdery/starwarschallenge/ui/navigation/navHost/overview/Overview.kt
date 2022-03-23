@@ -22,7 +22,7 @@ fun Overview(
 ) {
 
     LazyColumn{
-        itemsIndexed(charactersList) { _, item ->
+        itemsIndexed(charactersList) { _, item -> 
             if(item != null) {
                 if(item.name.lowercase().contains(filter.lowercase())){
                     OverviewItem(

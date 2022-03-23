@@ -27,5 +27,4 @@ class NetworkModule {
     ): PagingSource<String, Character> {
         return charactersPagingDataSource
     }
-
 }
